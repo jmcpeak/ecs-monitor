@@ -1,32 +1,49 @@
 {
   "name": "tombola.ecs-cloudwatch-monitor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "homepage": "/",
   "devDependencies": {
-    "react-scripts": "0.9.0"
+    "@vitejs/plugin-react": "^2.0.0",
+    "prettier": "^2.7.1",
+    "vite": "^3.0.2"
   },
   "dependencies": {
-    "aws-sdk": "^2.18.0",
-    "axios": "^0.15.3",
-    "chart.js": "^2.5.0",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.9.0",
+    "@mui/utils": "^5.9.0",
+    "aws-sdk": "^2.1177.0",
+    "axios": "^0.27.2",
+    "chart.js": "^2.9.4",
     "countup.js": "^1.8.2",
-    "moment": "^2.17.1",
+    "moment": "^2.29.4",
     "nprogress": "^0.2.0",
-    "react": "^15.4.2",
-    "react-addons-css-transition-group": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-router": "^3.0.2",
-    "rxjs": "^5.2.0",
-    "tippy.js": "^2.1.1"
+    "prop-types": "^15.8.1",
+    "ramda": "^0.28.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
+    "rxjs": "^5.5.12",
+    "tippy.js": "^6.3.7",
+    "util": "^0.12.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
