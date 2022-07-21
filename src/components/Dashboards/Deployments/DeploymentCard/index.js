@@ -1,1 +1,1 @@
-export { default } from './DeploymentCard.jsx';
+export { default } from './DeploymentCard';

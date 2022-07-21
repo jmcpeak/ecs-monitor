@@ -1,1 +1,1 @@
-export { default } from './ClusterSummary.jsx';
+export { default } from './ClusterSummary';

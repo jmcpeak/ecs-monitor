@@ -1,1 +1,1 @@
-export { default } from './EventCard.jsx';
+export { default } from './EventCard';

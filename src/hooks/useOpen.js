@@ -1,5 +1,5 @@
-import { handleStopPropagation } from './utils';
 import { useMemo, useState } from 'react';
+import { handleStopPropagation } from './utils';
 
 const useOpen = (initialValue = false) => {
   const [open, setOpen] = useState(initialValue);

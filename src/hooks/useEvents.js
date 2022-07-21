@@ -1,6 +1,6 @@
 import { startTransition, useEffect, useState } from 'react';
-import { aggregatedEventStream$ } from '../dataStreams/serviceStreams';
 import { Subject } from 'rxjs';
+import { aggregatedEventStream$ } from '../dataStreams/serviceStreams';
 
 const COUNTS = [10, 15, 30, 60, 120];
 const DEFAULT_COUNT = COUNTS[2];

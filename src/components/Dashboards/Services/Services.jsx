@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid';
 import EventCard from './EventCard';
-import TaskCard from './TaskCard';
+import TaskOverviewCard from './TaskOverviewCard';
 import TaskChurnCard from './TaskChurnCard';
 
 const sx = { paddingLeft: 1, paddingRight: 1 };
@@ -9,7 +9,7 @@ const Services = () => {
   return (
     <Grid container spacing={2} sx={sx}>
       <Grid item xs={5}>
-        <TaskCard />
+        <TaskOverviewCard />
       </Grid>
       <Grid item xs={7}>
         <Grid container direction="column" spacing={2}>

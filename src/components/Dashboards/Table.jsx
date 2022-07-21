@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { startTransition, useState } from 'react';
 import MuiTable from '@mui/material/Table';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from './TableHead.jsx';
+import TableHead from './TableHead';
 import {
   ASC,
   dateCompareFn,
@@ -29,6 +29,7 @@ const Table = ({
 
     startTransition(() => {
       setCompareFn(() =>
+        // eslint-disable-next-line no-nested-ternary
         property === 'serviceName' || property === 'taskDefinition'
           ? stringCompareFn(order, property)
           : property === 'createdAt'
@@ -62,6 +63,8 @@ Table.propTypes = {
   defaultCompareFn: PropTypes.func.isRequired,
   defaultOrder: PropTypes.string.isRequired,
   defaultOrderBy: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  headCells: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Table;

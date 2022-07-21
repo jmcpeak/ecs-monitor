@@ -1,11 +1,11 @@
 import moment from 'moment';
+import { Link, Navigate } from 'react-router-dom';
 import config from './config';
 import AgentsDashboard from './components/agents';
 import ClustersDashboard from './components/clusters';
 import DeploymentsDashboard from './components/Dashboards/Deployments';
 import LogsDashboard from './components/Dashboards/Logs';
 import ServicesDashboard from './components/Dashboards/Services';
-import { Link, Navigate } from 'react-router-dom';
 import { MOUNTING_PATH } from './globalConfig';
 
 const Agents = 'Agents';
@@ -54,12 +54,12 @@ export const routes = [
   },
   {
     key: 'rootToServices',
-    element: <Navigate to={servicesPath} replace />,
+    element: <Navigate replace to={servicesPath} />,
     path: MOUNTING_PATH,
   },
   {
     key: 'noMatchToServices',
-    element: <Navigate to={servicesPath} replace />,
+    element: <Navigate replace to={servicesPath} />,
     path: '*',
   },
 ];
@@ -99,8 +99,8 @@ export const tabs = [
 const threshold = config.TASK_CHURN_DETECTION_TIME_THRESHOLD;
 const comparisonDate = moment().subtract(threshold, 'minutes');
 
-export const scanServiceEventsForTaskChurn = (services) => {
-  return services.map((service) => {
+export const scanServiceEventsForTaskChurn = (servicesValue) => {
+  return servicesValue.map((service) => {
     const churnEvents = service.events.filter((e) => {
       // if the message includes HAS STARTED, AND the event is within the threshold
       return (

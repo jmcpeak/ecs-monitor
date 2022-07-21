@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { nameFromAwsArn } from '../../../../utils/stringFormatting';
-import Tooltip from '../../../tooltip/tooltip.jsx';
+import Tooltip from '../../../tooltip/tooltip';
 import './agent.css';
 
 function filterForInstanceType(attributes) {
@@ -10,6 +10,7 @@ function filterForInstanceType(attributes) {
 
 class Agent extends Component {
   get instanceId() {
+    // eslint-disable-next-line react/destructuring-assignment
     return this.props.agentDetails.instance.ec2InstanceId;
   }
 
@@ -22,6 +23,7 @@ class Agent extends Component {
   }
 
   getColour(taskDefinitionArn) {
+    // eslint-disable-next-line react/destructuring-assignment
     return this.props.taskDefinitionColours[taskDefinitionArn];
   }
 
@@ -32,11 +34,11 @@ class Agent extends Component {
     const lastStatus = task.lastStatus.toLowerCase();
     return (
       <li
-        className={`task card-panel ${lastStatus}`}
         key={task.taskArn}
+        className={`task card-panel ${lastStatus}`}
         style={style}
       >
-        <i className="status-icon"></i>
+        <i className="status-icon" />
         <p className="task-definition">
           {nameFromAwsArn(task.taskDefinitionArn)}
         </p>
@@ -45,6 +47,7 @@ class Agent extends Component {
   }
 
   render() {
+    // eslint-disable-next-line react/destructuring-assignment
     const details = this.props.agentDetails;
     const taskListItems = details.tasks.map(this.renderTaskListEntry, this);
     const instanceType = details.instance.attributes.find(
@@ -53,9 +56,9 @@ class Agent extends Component {
     return (
       <div className="agent col" id={`agent-${this.instanceId}`}>
         <Tooltip
+          tippySettings={this.tooltipSettings}
           tooltipId={`tooltip-${this.instanceId}`}
           triggerId={`#agent-${this.instanceId} .agent-icon`}
-          tippySettings={this.tooltipSettings}
         >
           <ul className="tooltip-details-list">
             <li>Status: {details.instance.status}</li>
@@ -91,7 +94,9 @@ class Agent extends Component {
 }
 
 Agent.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   agentDetails: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   taskDefinitionColours: PropTypes.object.isRequired,
 };
 

@@ -8,10 +8,12 @@ const colorCache = {};
 const useTaskDefinitions = () => {
   useEffect(() => {
     const updateState = (arns) => {
+      // eslint-disable-next-line no-plusplus
       for (let i = 0; i < arns.length; i++) {
         const arn = arns[i];
 
         if (colorCache[arn]) {
+          // eslint-disable-next-line no-continue
           continue;
         }
 

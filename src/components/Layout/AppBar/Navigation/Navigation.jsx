@@ -1,6 +1,6 @@
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { tabs } from '../../../../consts.jsx';
+import { tabs } from '../../../../consts';
 import useOnChange from './useOnChange';
 
 const Navigation = () => {
@@ -15,8 +15,8 @@ const Navigation = () => {
       value={value}
       variant="scrollable"
     >
-      {tabs.map((props) => (
-        <Tab {...props} />
+      {tabs.map(({ key, ...props }) => (
+        <Tab key={key} {...props} />
       ))}
     </Tabs>
   );

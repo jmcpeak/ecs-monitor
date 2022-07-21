@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LogViewer from '../logViewer/logViewerComponent.jsx';
+import LogViewer from '../logViewer/logViewerComponent';
 import { getLogs, getLogEvents } from '../../../../dataRequests/logRequests';
 import { Event, progressBarEvent$ } from '../../../../pubsub/eventStreams';
 import './logsDashboardComponent.css';
@@ -9,6 +9,7 @@ class LogsDashboard extends Component {
     super(props);
     this.state = {
       logs: [],
+      // eslint-disable-next-line no-void
       logStreamResponse: void 0,
       activeLogStreamName: '',
     };
@@ -23,18 +24,17 @@ class LogsDashboard extends Component {
     this.renderLogViewer = this.renderLogViewer.bind(this);
   }
 
+  // eslint-disable-next-line react/sort-comp
   updateLogsState(logsResponse) {
     progressBarEvent$.next(new Event(this, 'done'));
-    this.setState(
-      Object.assign({}, this.state, { logs: logsResponse.logStreams })
-    );
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    this.setState({ ...this.state, logs: logsResponse.logStreams });
   }
 
   updateLogResponseState(logStreamResponse) {
     progressBarEvent$.next(new Event(this, 'done'));
-    this.setState(
-      Object.assign({}, this.state, { logStreamResponse: logStreamResponse })
-    );
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    this.setState({ ...this.state, logStreamResponse });
   }
 
   handleGetRecentStreamsClick() {
@@ -45,19 +45,20 @@ class LogsDashboard extends Component {
   handleSearch(e) {
     e.preventDefault();
 
-    const fieldValue = this.refs['logSearch'].value;
+    // eslint-disable-next-line react/no-string-refs
+    const fieldValue = this.refs.logSearch.value;
     if (!fieldValue) return;
 
     progressBarEvent$.next(new Event(this, 'start'));
-    getLogs(this.refs['logSearch'].value).then(this.updateLogsState);
+    // eslint-disable-next-line react/no-string-refs
+    getLogs(this.refs.logSearch.value).then(this.updateLogsState);
   }
 
   handleLogClick(log, e) {
     e.preventDefault();
     progressBarEvent$.next(new Event(this, 'start'));
-    this.setState(
-      Object.assign({}, this.state, { activeLogStreamName: log.logStreamName })
-    );
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    this.setState({ ...this.state, activeLogStreamName: log.logStreamName });
     getLogEvents(log.logStreamName).then(this.updateLogResponseState);
   }
 
@@ -65,8 +66,8 @@ class LogsDashboard extends Component {
     return (
       <li key={log.arn}>
         <a
-          href="src/components/Dashboards/Logs/logsDashboard/logsDashboardComponent.jsx"
           className="log-stream-entry"
+          href="src/components/Dashboards/Logs/logsDashboard/logsDashboardComponent.jsx"
           onClick={this.handleLogClick.bind(this, log)}
         >
           {log.logStreamName}
@@ -76,6 +77,7 @@ class LogsDashboard extends Component {
   }
 
   renderLogViewer() {
+    /* eslint-disable react/destructuring-assignment */
     return (
       <LogViewer
         logStream={this.state.logStreamResponse}
@@ -85,13 +87,15 @@ class LogsDashboard extends Component {
   }
 
   render() {
+    /* eslint-disable react/no-string-refs */
     const list = this.state.logs.map(this.renderLogEntry);
     return (
       <div className="logs-dashboard-container">
         <header>
           <button
-            onClick={this.handleGetRecentStreamsClick}
             className="waves-effect waves-light btn"
+            onClick={this.handleGetRecentStreamsClick}
+            type="button"
           >
             <i className="material-icons left">view_list</i>
             Recent 50 streams
@@ -99,12 +103,13 @@ class LogsDashboard extends Component {
           <form onSubmit={this.handleSearch}>
             <div className="input-field">
               <input
-                id="logSearch"
                 ref="logSearch"
+                className="log-search-input validate"
+                id="logSearch"
                 name="logSearch"
                 type="text"
-                className="log-search-input validate"
               />
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label htmlFor="logSearch">Search</label>
             </div>
           </form>

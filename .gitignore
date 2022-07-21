@@ -19,3 +19,4 @@ yarn-error.log*
 
 # app specific
 devCredentials.json
+/.env.local

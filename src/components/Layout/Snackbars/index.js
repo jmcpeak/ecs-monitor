@@ -1,1 +1,2 @@
-export { default as SnackbarChurn } from './SnackbarChurn.jsx';
+// eslint-disable-next-line import/prefer-default-export
+export { default as TaskChurn } from './TaskChurn';

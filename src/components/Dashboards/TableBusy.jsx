@@ -8,7 +8,7 @@ const TableBusy = ({ colSpan }) => {
   return (
     <TableRow>
       <TableCell colSpan={colSpan}>
-        <LinearProgress variant="indeterminate" sx={busySX} />
+        <LinearProgress sx={busySX} variant="indeterminate" />
       </TableCell>
     </TableRow>
   );

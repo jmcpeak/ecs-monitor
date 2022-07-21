@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import TableCell from '@mui/material/TableCell';
 import MuiTableRow from '@mui/material/TableRow';
-import MetricStat from '../../../../metrics/metricStatComponent.jsx';
+import MetricStat from '../../../../metrics/metricStatComponent';
 import { metricStatStream$ } from '../../../../../dataStreams/metricStreams';
 import { nameFromAwsArn } from '../../../../../utils/stringFormatting';
 import './serviceTaskOverviewComponent.css';
-import TableCellServiceName from './TableCellServiceName.jsx';
+import TableCellServiceName from './TableCellServiceName';
 
 const TableRow = ({ clusterArn, desiredCount, runningCount, serviceName }) => {
   const dimensions = [
@@ -20,7 +20,7 @@ const TableRow = ({ clusterArn, desiredCount, runningCount, serviceName }) => {
   );
 
   return (
-    <MuiTableRow hover className="service-overview-entry">
+    <MuiTableRow className="service-overview-entry" hover>
       <TableCellServiceName
         desiredCount={desiredCount}
         runningCount={runningCount}

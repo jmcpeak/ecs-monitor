@@ -1,5 +1,5 @@
-import EcsTable from '../../../Table.jsx';
-import TableRows from './TableRows.jsx';
+import EcsTable from '../../../Table';
+import TableRows from './TableRows';
 import { useServices } from '../../../../../hooks';
 import {
   defaultOrder,
@@ -9,7 +9,7 @@ import {
 } from './consts';
 
 const Table = (props) => {
-  const services = useServices();
+  const services = useServices('Table');
 
   return (
     <EcsTable

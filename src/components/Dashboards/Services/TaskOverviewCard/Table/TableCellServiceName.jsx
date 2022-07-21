@@ -10,7 +10,7 @@ const TableCellServiceName = ({ desiredCount, runningCount, serviceName }) => {
         <Grid item>{serviceName}</Grid>
         {runningCount !== desiredCount && (
           <Grid item>
-            <WarningAmber fontSize="small" color="warning" />
+            <WarningAmber color="warning" fontSize="small" />
           </Grid>
         )}
       </Grid>

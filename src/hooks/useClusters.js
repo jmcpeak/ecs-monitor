@@ -5,9 +5,9 @@ const useClusters = (sort) => {
   const [clusters, setClusters] = useState([]);
 
   useEffect(() => {
-    const updateState = (clusters) => {
+    const updateState = (latestClusters) => {
       startTransition(() => {
-        setClusters(sort ? clusters.sort(sort) : clusters);
+        setClusters(sort ? latestClusters.sort(sort) : latestClusters);
       });
     };
 

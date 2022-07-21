@@ -1,7 +1,7 @@
 import { startTransition, useEffect, useState } from 'react';
 import { formattedTimeStamp } from './utils';
 import { clusterStream$ } from '../dataStreams/clusterStreams';
-import { clusters as name } from '../consts.jsx';
+import { clusters as name } from '../consts';
 
 const useClusterTitle = () => {
   const [count, setCount] = useState('Loading');

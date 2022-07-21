@@ -1,1 +1,1 @@
-export { default } from './AgentSummary.jsx';
+export { default } from './AgentSummary';

@@ -5,7 +5,7 @@ import { busySX } from './consts';
 const GridBusy = () => {
   return (
     <Grid item xs={12}>
-      <LinearProgress variant="indeterminate" sx={busySX} />
+      <LinearProgress sx={busySX} variant="indeterminate" />
     </Grid>
   );
 };

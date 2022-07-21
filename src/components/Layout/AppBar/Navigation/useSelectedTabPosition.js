@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { tabs } from '../../../../consts.jsx';
+import { tabs } from '../../../../consts';
 
 const useSelectedTabPosition = () => {
   const location = useLocation();

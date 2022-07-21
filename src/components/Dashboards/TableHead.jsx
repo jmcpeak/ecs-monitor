@@ -43,7 +43,8 @@ const TableHead = ({ disabled, headCells, onRequestSort, order, orderBy }) => {
 
 TableHead.propTypes = {
   disabled: PropTypes.bool.isRequired,
-  headCells: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  headCells: PropTypes.arrayOf(PropTypes.object).isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,

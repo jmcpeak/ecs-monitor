@@ -6,4 +6,5 @@
  * Ensure to include a trailing slash /
  *
  */
+// eslint-disable-next-line import/prefer-default-export
 export const MOUNTING_PATH = '/';

@@ -4,7 +4,7 @@ import {
   clustersPath,
   deploymentsPath,
   servicesPath,
-} from '../consts.jsx';
+} from '../consts';
 import useClusterTitle from './useClusterTitle';
 import useDeploymentTitle from './useDeploymentTitle';
 import useServiceTitle from './useServiceTitle';
@@ -20,13 +20,19 @@ const useTitle = () => {
   const isDeployment = useMatch(deploymentsPath);
   const isService = useMatch(servicesPath);
 
-  return isService
-    ? service
-    : isCluster || isAgent
-    ? cluster
-    : isDeployment
-    ? deployment
-    : EMPTY;
+  if (isService) {
+    return service;
+  }
+
+  if (isCluster || isAgent) {
+    return cluster;
+  }
+
+  if (isDeployment) {
+    return deployment;
+  }
+
+  return EMPTY;
 };
 
 export default useTitle;

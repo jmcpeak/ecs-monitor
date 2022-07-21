@@ -4,56 +4,55 @@ import config from '../config';
 import awsRequest from '../awsRequest';
 import { streamRetryFn } from './common';
 
-
+// eslint-disable-next-line no-underscore-dangle
 const _tasksStreamCache = {};
 
-
 function getTaskArnsForCluster(cluster) {
-    const params = {
-        cluster: cluster
-    };
-    return awsRequest.create((awsConfig) => {
-        const ecs = new AWS.ECS(awsConfig);
-        return ecs.listTasks(params).promise();
-    });
+  const params = {
+    cluster,
+  };
+  return awsRequest.create((awsConfig) => {
+    const ecs = new AWS.ECS(awsConfig);
+    return ecs.listTasks(params).promise();
+  });
 }
 
 function describeTasksFn(cluster) {
-    return (listTasksResponse) => {
-        if (listTasksResponse.taskArns.length === 0) {
-            return Promise.resolve({ tasks: [] });
-        }
-        const params = { 
-            cluster: cluster,
-            tasks: listTasksResponse.taskArns
-        };
-        return awsRequest.create((awsConfig) => {
-            const ecs = new AWS.ECS(awsConfig);
-            return ecs.describeTasks(params).promise();
-        });
+  return (listTasksResponse) => {
+    if (listTasksResponse.taskArns.length === 0) {
+      return Promise.resolve({ tasks: [] });
+    }
+    const params = {
+      cluster,
+      tasks: listTasksResponse.taskArns,
     };
+    return awsRequest.create((awsConfig) => {
+      const ecs = new AWS.ECS(awsConfig);
+      return ecs.describeTasks(params).promise();
+    });
+  };
 }
-
 
 // STREAMS ===============
 
+// eslint-disable-next-line import/prefer-default-export
 export function tasksStream(cluster) {
-    const cacheKey = `tasksStream::${cluster}`;
-    if (_tasksStreamCache[cacheKey]) {
-        return _tasksStreamCache[cacheKey];
-    }
-    
-    const obs$ = Observable.timer(0, config.TASK_STREAM_REFRESH_INTERVAL * 1000) // timer in seconds
-        .flatMap(() => {
-            const listTasks = getTaskArnsForCluster(cluster);
-            return listTasks.then(describeTasksFn(cluster));
-        })
-        .pluck('tasks')
-        .retryWhen(streamRetryFn(3000))
-        .multicast(() => new ReplaySubject(1))
-        .refCount();
+  const cacheKey = `tasksStream::${cluster}`;
+  if (_tasksStreamCache[cacheKey]) {
+    return _tasksStreamCache[cacheKey];
+  }
 
-    _tasksStreamCache[cacheKey] = obs$;
+  const obs$ = Observable.timer(0, config.TASK_STREAM_REFRESH_INTERVAL * 1000) // timer in seconds
+    .flatMap(() => {
+      const listTasks = getTaskArnsForCluster(cluster);
+      return listTasks.then(describeTasksFn(cluster));
+    })
+    .pluck('tasks')
+    .retryWhen(streamRetryFn(3000))
+    .multicast(() => new ReplaySubject(1))
+    .refCount();
 
-    return obs$;
-} 
+  _tasksStreamCache[cacheKey] = obs$;
+
+  return obs$;
+}

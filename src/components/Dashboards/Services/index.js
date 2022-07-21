@@ -1,1 +1,1 @@
-export { default } from './Services.jsx';
+export { default } from './Services';

@@ -1,5 +1,5 @@
-import EcsTable from '../../../Table.jsx';
-import TableRows from './TableRows.jsx';
+import EcsTable from '../../../Table';
+import TableRows from './TableRows';
 import { useDeployments } from '../../../../../hooks';
 import {
   defaultOrder,

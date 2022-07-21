@@ -2,8 +2,8 @@ import PaperAccordion from '../../PaperAccordion';
 import Table from './Table';
 import { useWindowHeight } from '../../../../hooks';
 
-const TaskCard = () => {
-  const style = useWindowHeight(185);
+const TaskOverviewCard = () => {
+  const style = useWindowHeight(205);
 
   return (
     <PaperAccordion title="Task Overview">
@@ -12,4 +12,4 @@ const TaskCard = () => {
   );
 };
 
-export default TaskCard;
+export default TaskOverviewCard;

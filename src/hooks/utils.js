@@ -12,16 +12,20 @@ export const handleStopPropagation = (event) => {
 
 export const stringToColor = (str) => {
   let hash = 0;
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < str.length; i++) {
+    // eslint-disable-next-line no-bitwise
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
   }
 
   let color = '#';
 
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 3; i++) {
+    // eslint-disable-next-line no-bitwise
     const value = (hash >> (i * 8)) & 0xff;
 
-    color += ('00' + value.toString(16)).substr(-2);
+    color += `00${value.toString(16)}`.substr(-2);
   }
 
   return color;

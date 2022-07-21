@@ -1,7 +1,7 @@
-import Graph from './graph/graphComponent.jsx';
-import MetricStatGroup from './metricStats/metricStatsGroupComponent.jsx';
+import Graph from './graph/graphComponent';
+import MetricStatGroup from './metricStats/metricStatsGroupComponent';
 import { metricsStream$ } from '../../dataStreams/metricStreams';
-import ClusterSummaryComponent from './summary/clusterSummaryComponent.jsx';
+import ClusterSummaryComponent from './summary/clusterSummaryComponent';
 import { useClusters } from '../../hooks';
 
 const inlineBlock = {
@@ -11,17 +11,17 @@ const inlineBlock = {
 const mapToClusterName = (cluster) => cluster?.clusterName ?? 'name';
 
 const mapClusterToMetrics = (cluster, i) => {
-  const clusterName = cluster.clusterName;
+  const { clusterName } = cluster;
   const dimensions = [{ Name: 'ClusterName', Value: clusterName }];
   const cpuDataStream$ = metricsStream$(dimensions, 'CPUUtilization');
   const memoryDataStream$ = metricsStream$(dimensions, 'MemoryUtilization');
 
   return (
-    <li key={clusterName + '-graphMetric' + i} style={inlineBlock}>
+    <li key={`${clusterName}-graphMetric${i}`} style={inlineBlock}>
       <Graph
-        memoryStream={memoryDataStream$}
         cpuStream={cpuDataStream$}
         label={clusterName}
+        memoryStream={memoryDataStream$}
       />
     </li>
   );

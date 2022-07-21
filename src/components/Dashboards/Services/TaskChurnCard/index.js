@@ -1,1 +1,1 @@
-export { default } from './TaskChurnCard.jsx';
+export { default } from './TaskChurnCard';

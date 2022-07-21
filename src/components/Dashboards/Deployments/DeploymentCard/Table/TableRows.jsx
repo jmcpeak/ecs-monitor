@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import TableBody from '@mui/material/TableBody';
-import TableBusy from '../../../TableBusy.jsx';
-import TableRow from './TableRow.jsx';
+import TableBusy from '../../../TableBusy';
+import TableRow from './TableRow';
 import { useDeployments } from '../../../../../hooks';
 
 const TableRows = ({ compareFn }) => {

@@ -13,10 +13,10 @@ const AppBar = () => {
         <Grid alignItems="center" container spacing={2}>
           <Grid item>
             <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
               aria-label="menu"
+              color="inherit"
+              edge="start"
+              size="large"
             >
               <MenuIcon />
             </IconButton>

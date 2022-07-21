@@ -1,1 +1,1 @@
-export { default } from './logsDashboard/logsDashboardComponent.jsx';
+export { default } from './logsDashboard/logsDashboardComponent';

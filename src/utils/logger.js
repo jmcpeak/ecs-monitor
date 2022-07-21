@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
+  // eslint-disable-next-line no-console
   logToConsole: console.log.bind(console),
 };

@@ -7,9 +7,11 @@ const useDeployments = (compareFn) => {
   const [deployments, setDeployments] = useState([]);
 
   useEffect(() => {
-    const updateState = (deployments) => {
+    const updateState = (latestDeployments) => {
       startTransition(() => {
-        setDeployments(compareFn ? deployments.sort(compareFn) : deployments);
+        setDeployments(
+          compareFn ? latestDeployments.sort(compareFn) : latestDeployments
+        );
       });
     };
 

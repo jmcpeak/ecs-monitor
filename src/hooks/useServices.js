@@ -1,13 +1,17 @@
 import { startTransition, useEffect, useState } from 'react';
 import { servicesStream$ } from '../dataStreams/serviceStreams';
 
-const useServices = (compareFn) => {
-  const [services, setServices] = useState([]);
+const initialState = [];
+
+const useServices = (name = 'unknown', compareFn = null) => {
+  const [services, setServices] = useState(initialState);
 
   useEffect(() => {
-    const updateState = (services) => {
+    const updateState = (latestServices) => {
       startTransition(() => {
-        setServices(compareFn ? services.sort(compareFn) : services);
+        setServices(
+          compareFn ? latestServices.sort(compareFn) : latestServices
+        );
       });
     };
 
@@ -16,7 +20,7 @@ const useServices = (compareFn) => {
     return () => {
       observer.unsubscribe();
     };
-  }, [compareFn]);
+  }, [compareFn, name]);
 
   return services;
 };

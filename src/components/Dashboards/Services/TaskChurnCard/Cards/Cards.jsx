@@ -3,8 +3,8 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid';
 import { useEffect, useState } from 'react';
-import GridBusy from '../../../GridBusy.jsx';
-import { scanServiceEventsForTaskChurn } from '../../../../../consts.jsx';
+import GridBusy from '../../../GridBusy';
+import { scanServiceEventsForTaskChurn } from '../../../../../consts';
 import { useServices } from '../../../../../hooks';
 
 const avatar = <Autorenew color="warning" />;
@@ -21,7 +21,7 @@ const cardHeaderSX = {
 
 const TableRows = () => {
   const [churnEntries, setChurnEntries] = useState([]);
-  const services = useServices();
+  const services = useServices('TableRows');
 
   useEffect(() => {
     setChurnEntries(scanServiceEventsForTaskChurn(services));
@@ -33,6 +33,7 @@ const TableRows = () => {
         churnEntries.map(
           ({ churnEvents, isChurnDetected, serviceArn, serviceName }, index) =>
             isChurnDetected && (
+              // eslint-disable-next-line react/no-array-index-key
               <Grid key={`${serviceArn}-${index}`} item xs={4}>
                 <Card sx={cardSX}>
                   <CardHeader

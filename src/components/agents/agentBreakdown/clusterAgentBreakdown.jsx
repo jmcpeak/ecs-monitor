@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Rx from 'rxjs';
-import Agent from './agent/agent.jsx';
+import Agent from './agent/agent';
 import { containerInstancesStream } from '../../../dataStreams/ec2Streams';
 import { tasksStream } from '../../../dataStreams/taskStreams';
 import './clusterAgentBreakdown.css';
@@ -41,20 +41,16 @@ class ClusterAgentBreakdown extends Component {
     this.renderAgentComponent = this.renderAgentComponent.bind(this);
   }
 
+  // eslint-disable-next-line react/sort-comp
   updateState(newState) {
     this.setState({
       data: newState,
     });
   }
 
-  taskCount(data) {
-    if (data.length === 0) return 0;
-
-    return data.reduce((acc, next) => acc + next.tasks.length, 0);
-  }
-
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
-    const clusterName = this.props.clusterName;
+    const { clusterName } = this.props;
     this.tasksDataObservable = Rx.Observable.combineLatest(
       containerInstancesStream(clusterName),
       tasksStream(clusterName),
@@ -69,10 +65,11 @@ class ClusterAgentBreakdown extends Component {
   }
 
   renderAgentComponent(entry) {
+    /* eslint-disable react/destructuring-assignment */
     return (
       <Agent
-        agentDetails={entry}
         key={entry.instance.ec2InstanceId}
+        agentDetails={entry}
         taskDefinitionColours={this.props.taskDefinitionColours}
       />
     );
@@ -101,6 +98,7 @@ ClusterAgentBreakdown.propTypes = {
   clusterName: PropTypes.string.isRequired,
   agentCount: PropTypes.number.isRequired,
   runningTasksCount: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   taskDefinitionColours: PropTypes.object.isRequired,
 };
 

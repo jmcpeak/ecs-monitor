@@ -1,7 +1,7 @@
 import { startTransition, useEffect, useState } from 'react';
 import { formattedTimeStamp } from './utils';
 import { aggregatedServiceDeploymentStream$ } from '../dataStreams/serviceStreams';
-import { deployments as name } from '../consts.jsx';
+import { deployments as name } from '../consts';
 
 const desiredCount = 10;
 

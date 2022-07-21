@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
+import moment from 'moment';
 import { aggregatedServiceDeploymentStream$ } from '../dataStreams/serviceStreams';
 import config from '../config';
-import moment from 'moment';
 
 
 function isNewDeployment(deployment) {
@@ -26,6 +26,6 @@ export const newDeploymentEvent$ =
     .map(deployment => {
         return new Event(newDeploymentEvent$, {
             message: 'deployment started',
-            deployment: deployment
+            deployment
         })
     });

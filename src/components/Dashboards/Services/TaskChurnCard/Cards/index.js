@@ -1,1 +1,1 @@
-export { default } from './Cards.jsx';
+export { default } from './Cards';

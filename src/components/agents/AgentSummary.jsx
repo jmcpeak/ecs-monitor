@@ -1,4 +1,4 @@
-import ClusterAgentBreakdown from './agentBreakdown/clusterAgentBreakdown.jsx';
+import ClusterAgentBreakdown from './agentBreakdown/clusterAgentBreakdown';
 import { useTaskDefinitions, useClusters } from '../../hooks';
 
 const sortByHighestTaskCountDesc = (clusterA, clusterB) => {
@@ -14,8 +14,8 @@ const AgentSummary = () => {
       {clusters.map((cluster) => (
         <ClusterAgentBreakdown
           key={`breakdown::${cluster.clusterName}`}
-          clusterName={cluster.clusterName}
           agentCount={cluster.registeredContainerInstancesCount}
+          clusterName={cluster.clusterName}
           runningTasksCount={
             cluster.runningTasksCount + cluster.pendingTasksCount
           }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { loadingBar } from '../../loading.jsx';
+import { loadingBar } from '../../loading';
 import { clusterStream$ } from '../../../dataStreams/clusterStreams';
 import './clusterSummaryComponent.css';
 
 function mapClusterSummaryEntryToDOM(entry) {
   return (
-    <tr className="cluster-entry" key={entry.clusterArn}>
-      {/*{entry.status}*/}
-      {/*{entry.clusterArn}*/}
+    <tr key={entry.clusterArn} className="cluster-entry">
+      {/* {entry.status} */}
+      {/* {entry.clusterArn} */}
       <td className="cluster-name">{entry.clusterName}</td>
       <td className="number">{entry.activeServicesCount}</td>
       <td className="number">{entry.registeredContainerInstancesCount}</td>
@@ -25,16 +25,18 @@ class ClusterSummary extends Component {
     };
   }
 
+  // eslint-disable-next-line react/sort-comp
   updateState(clusters) {
     this.initialRender = false;
     if (!clusters || clusters.length === 0) {
       return;
     }
     this.setState({
-      clusters: clusters,
+      clusters,
     });
   }
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     this.clusterStreamObserver = clusterStream$.subscribe(
       this.updateState.bind(this)
@@ -45,11 +47,13 @@ class ClusterSummary extends Component {
     this.clusterStreamObserver.unsubscribe();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   renderNoClusters() {
     return <p>There are no clusters</p>;
   }
 
   renderTable() {
+    // eslint-disable-next-line react/destructuring-assignment
     const tableBody = this.state.clusters.map(mapClusterSummaryEntryToDOM);
     return (
       <table>
@@ -70,6 +74,7 @@ class ClusterSummary extends Component {
     let content;
     if (this.initialRender) {
       content = loadingBar();
+      // eslint-disable-next-line react/destructuring-assignment
     } else if (this.state.clusters.length === 0) {
       content = this.renderNoClusters();
     } else {
@@ -80,7 +85,7 @@ class ClusterSummary extends Component {
       <section className="cluster-summary component-panel">
         <div className="card-panel">
           <strong className="card-header">Summary</strong>
-          <div className="divider"></div>
+          <div className="divider" />
           {content}
         </div>
       </section>

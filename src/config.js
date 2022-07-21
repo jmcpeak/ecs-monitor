@@ -4,20 +4,12 @@ import { MOUNTING_PATH } from './globalConfig';
 import devCredentialsJSON from './devCredentials.json';
 
 const devCredentials =
+  // eslint-disable-next-line no-void
   process.env.NODE_ENV === 'development' ? devCredentialsJSON : void 0;
-
-function refreshCredentials(awsCredentialsObject) {
-  return (cb) => {
-    console.log('> REFRESHING AWS CREDENTIALS');
-    awsConnectionManager
-      .getAuthenticationDetails()
-      .then(updateCredentials(awsCredentialsObject, cb))
-      .catch(cb);
-  };
-}
 
 function updateCredentials(awsCredentialsObject, cb) {
   return (configDetails) => {
+    /* eslint-disable no-param-reassign */
     awsCredentialsObject.accessKeyId = configDetails.Credentials.AccessKeyId;
     awsCredentialsObject.secretAccessKey =
       configDetails.Credentials.SecretAccessKey;
@@ -31,6 +23,16 @@ function updateCredentials(awsCredentialsObject, cb) {
     cb();
   };
 }
+function refreshCredentials(awsCredentialsObject) {
+  return (cb) => {
+    // eslint-disable-next-line no-console
+    console.log('> REFRESHING AWS CREDENTIALS');
+    awsConnectionManager
+      .getAuthenticationDetails()
+      .then(updateCredentials(awsCredentialsObject, cb))
+      .catch(cb);
+  };
+}
 
 /* always equals 'development' when 'npm start'
    always equals 'production' when 'npm run build'
@@ -38,6 +40,7 @@ function updateCredentials(awsCredentialsObject, cb) {
 function getAwsConfig() {
   return new Promise((resolve, reject) => {
     if (process.env.NODE_ENV === 'production') {
+      // eslint-disable-next-line no-promise-executor-return
       return awsConnectionManager
         .getAuthenticationDetails()
         .then((awsDetails) => {
@@ -54,7 +57,7 @@ function getAwsConfig() {
           return resolve(
             new AWS.Config({
               region: awsDetails.aws_region,
-              credentials: credentials,
+              credentials,
               httpOptions: {
                 timeout: 5000, // milliseconds
               },
@@ -74,6 +77,7 @@ function getAwsConfig() {
       );
     }
 
+    // eslint-disable-next-line no-promise-executor-return
     return resolve(
       new AWS.Config({
         region: devCredentials.AWS_REGION,
@@ -86,7 +90,6 @@ function getAwsConfig() {
   });
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   CLUSTER_ARN_REFRESH_INTERVAL: 10, // minutes
   CLUSTER_REFRESH_INTERVAL: 10, // seconds
@@ -96,7 +99,7 @@ export default {
   TASK_CHURN_DETECTION_TIME_THRESHOLD: 10, // minutes
   TASK_DEFINITION_REFRESH_INTERVAL: 10, // seconds
   TASK_STREAM_REFRESH_INTERVAL: 10, // seconds
-  CONTAINER_INSTANCES_REFRESH_INTERVAL: 60, //seconds
+  CONTAINER_INSTANCES_REFRESH_INTERVAL: 60, // seconds
   DEFAULT_STATS_REFRESH_INTERVAL: 10, // seconds
   DEFAULT_SETTINGS: {
     logGroup: 'ecs',

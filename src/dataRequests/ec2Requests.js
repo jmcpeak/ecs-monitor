@@ -2,7 +2,7 @@ import AWS from 'aws-sdk';
 import awsRequest from '../awsRequest';
 
 const describeEc2Instance = (instanceId) => {
-  return function (awsConfig) {
+  return function getConfig(awsConfig) {
     const ec2 = new AWS.EC2(awsConfig);
     return ec2
       .describeInstances({
@@ -13,6 +13,7 @@ const describeEc2Instance = (instanceId) => {
   };
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export const getEc2InstanceDetails = (instanceId) => {
   const detailsReq = describeEc2Instance(instanceId);
   return awsRequest.create(detailsReq);

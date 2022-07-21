@@ -1,7 +1,7 @@
 import { startTransition, useEffect, useState } from 'react';
 import { formattedTimeStamp } from './utils';
 import { servicesStream$ } from '../dataStreams/serviceStreams';
-import { services as name } from '../consts.jsx';
+import { services as name } from '../consts';
 
 const useServiceTitle = () => {
   const [count, setCount] = useState('Loading');
