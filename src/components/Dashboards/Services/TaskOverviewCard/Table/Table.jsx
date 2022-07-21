@@ -1,6 +1,6 @@
+import { useOutletContext } from 'react-router-dom';
 import EcsTable from '../../../Table';
 import TableRows from './TableRows';
-import { useServices } from '../../../../../hooks';
 import {
   defaultOrder,
   defaultOrderBy,
@@ -9,7 +9,7 @@ import {
 } from './consts';
 
 const Table = (props) => {
-  const services = useServices('Table');
+  const { servicesDisabled } = useOutletContext();
 
   return (
     <EcsTable
@@ -18,7 +18,7 @@ const Table = (props) => {
       defaultOrder={defaultOrder}
       defaultOrderBy={defaultOrderBy}
       headCells={headCells}
-      TableHeadDisabled={services.length === 0}
+      TableHeadDisabled={servicesDisabled}
       TableRows={TableRows}
     />
   );

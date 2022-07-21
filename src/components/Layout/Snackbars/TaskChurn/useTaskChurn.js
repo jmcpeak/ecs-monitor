@@ -1,15 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
-import { scanServiceEventsForTaskChurn } from '../../../../consts';
-import { useServices } from '../../../../hooks';
 
 const initialOpenState = false;
+const initialDismissList = [];
 
-const useTaskChurn = () => {
-  const [dismissList, setDismissList] = useState([]);
+const useTaskChurn = (churnEntries) => {
+  const [dismissList, setDismissList] = useState(initialDismissList);
   const [open, setOpen] = useState(initialOpenState);
   const [serviceName, setServiceName] = useState();
-  const services = useServices('useTaskChurn');
-  const churnEntries = scanServiceEventsForTaskChurn(services);
 
   useEffect(() => {
     churnEntries.every(({ isChurnDetected, serviceName: entryServiceName }) => {

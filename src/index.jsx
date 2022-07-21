@@ -6,11 +6,12 @@ import { routes } from './consts';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
+const path = removeTrailingSlash();
 
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route element={<App />} path={removeTrailingSlash()}>
+      <Route element={<App />} path={path}>
         {routes.map(({ key, ...props }) => (
           <Route key={key} {...props} />
         ))}

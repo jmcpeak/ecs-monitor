@@ -3,8 +3,9 @@ import TaskChurnAction from './TaskChurnAction';
 import TaskChurnMessage from './TaskChurnMessage';
 import useSnackbar from './useTaskChurn';
 
-const TaskChurn = () => {
-  const snackbar = useSnackbar();
+// eslint-disable-next-line react/prop-types
+const TaskChurn = ({ churnEntries, services }) => {
+  const snackbar = useSnackbar(churnEntries, services);
 
   return (
     <Snackbar

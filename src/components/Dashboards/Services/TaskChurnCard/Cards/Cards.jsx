@@ -2,10 +2,8 @@ import Autorenew from '@mui/icons-material/Autorenew';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid';
-import { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import GridBusy from '../../../GridBusy';
-import { scanServiceEventsForTaskChurn } from '../../../../../consts';
-import { useServices } from '../../../../../hooks';
 
 const avatar = <Autorenew color="warning" />;
 const titleTypographyProps = { variant: 'subtitle1' };
@@ -20,12 +18,7 @@ const cardHeaderSX = {
 };
 
 const TableRows = () => {
-  const [churnEntries, setChurnEntries] = useState([]);
-  const services = useServices('TableRows');
-
-  useEffect(() => {
-    setChurnEntries(scanServiceEventsForTaskChurn(services));
-  }, [services]);
+  const { churnEntries } = useOutletContext();
 
   return (
     <Grid container spacing={2}>
