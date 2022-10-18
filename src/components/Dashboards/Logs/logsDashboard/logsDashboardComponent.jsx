@@ -9,8 +9,7 @@ class LogsDashboard extends Component {
     super(props);
     this.state = {
       logs: [],
-      // eslint-disable-next-line no-void
-      logStreamResponse: void 0,
+      logStreamResponse: undefined,
       activeLogStreamName: '',
     };
 

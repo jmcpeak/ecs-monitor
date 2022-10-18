@@ -7,7 +7,7 @@ import { useEffect } from 'react';
  *
  * @param {(string|string[])} [eventTypeOrTypes=[]] - A case-sensitive string or strings representing the event type to listen for
  * @param {function} [listener=() => {}] - callback function - The object that receives a notification (an object that implements the Event interface) when an event of the specified type occurs
- * @param {object} [targetElement=window] - Common targets are Element, Document, and Window, but the target may be any object that supports events (such as XMLHttpRequest).
+ * @param {Window|WebSocket} [targetElement=window] - Common targets are Element, Document, and Window, but the target may be any object that supports events (such as XMLHttpRequest).
  * @param options
  */
 const useEventListener = (
